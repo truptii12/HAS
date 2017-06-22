@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Apointment System</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<script>
+    function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+<body>
+
+<div id='header'>
+  </div>
+<div id='menu'>
+  <div id="navbar">
+    <ul>
+      <li><a href="/home/index">HomePage</a></li>
+      
+      <li><a href="/doctors">Appointments</a></li>
+      <li><a href="/doctors">Doctor</a></li>
+      
+      
+      <li><a href="/aboutus">About Us</a></li> </ul>
+     
+</div>
+<div id= 'container'>
+  <div id='content'>
+    
+    <p class="notice"><%= flash[:notice] %></p>
+    <p class="alert"><%= flash[:alert] %></p>
+    
+   
+<%=yield%>
+  </div>
+  <div id= 'first-column'>
+    
+  
+  </div>
+</div>
+<div id= 'footer'>
+  <h6 class= "footertext">&copy; Online Appointment System &trade; 2017</h6>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+<%= form_for([@doctor, @appointment]) do |f| %>
+<form onsubmit= @appointment.isAvailable >
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+      <% @appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :appointmentdate %><br>
+    <%= f.date_select :appointmentdate %>
+  </div>
+  <div class="field">
+    <%= f.label :startTime %><br>
+    <%= f.time_select :startTime %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+ 
+  Enter Doctor name::(refer the details given below)
+  <div class="field">
+    <%= f.text_field :doctor_id %>
+    
+  </div>
+  
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+</form>
+<% end %>

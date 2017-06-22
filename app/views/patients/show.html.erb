@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @patient.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @patient.email %>
+</p>
+
+<p>
+  <strong>Bob:</strong>
+  <%= @patient.BOB %>
+</p>
+<%if current_user.role == "doctor" %>
+        <%= link_to 'Back', patients_path %>
+<% else %>
+<%= link_to 'Edit', edit_patient_path(@patient) %> |
+        <%= link_to 'Back', patients_path %>
+<% end %>

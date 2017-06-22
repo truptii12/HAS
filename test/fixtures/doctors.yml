@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dname: MyString
+  email: MyString
+  default_appoinment_duration: 1
+
+two:
+  dname: MyString
+  email: MyString
+  default_appoinment_duration: 1

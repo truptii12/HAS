@@ -1,0 +1,111 @@
+<html>
+<head>
+<style>
+/*div {
+    background-color: lightgrey;
+    width: 1500px;
+    border: 25px blue;
+    padding: 55px;
+    margin: 15px;
+}*/
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+divheader{
+    background-image:url("BL9uMGw.jpg");
+}
+
+</style>
+</head>
+<!--script>
+    function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script-->
+<body>
+    <divheader>
+        
+    <h1>Hospital Appointment System</h1>
+
+    <div class="tab">
+<!--
+  <button class="tablinks" onclick="openCity(event, 'Doctors')">Home Page</button>
+   <button class="tablinks" onclick="openCity(event, 'Appointment')">Appointment</button>
+  <button class="tablinks" onclick="openCity(event, 'About Us')">About Us</button>
+  <button class="tablinks" onclick="openCity(event, 'Contact')">Contact</button>
+  -->
+  
+  <div id="Doctors" class="tabcontent">
+  <h3>Doctors</h3>
+  <div id><%= link_to 'List Doctors', doctors_path %>
+
+<% if user_signed_in? %>
+    <%if  current_user.admin? %>
+    <%= link_to 'New Doctor', new_doctor_path %>
+    <% end %>
+</div>
+</div>
+<div id="About Us" class="tabcontent">
+  <h3>About Us</h3>
+  <p>Hospital appontment System</p> 
+</div>
+
+<div id="Contact" class="tabcontent">
+  <h3>Contact</h3>
+  <p>Contact us number 12345677 abc@abc.com</p>
+</div>
+</div>
+
+<% end %>
+
+</divheader>
+</body>
+</html>
