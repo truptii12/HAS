@@ -15,6 +15,7 @@
 
   <tbody>
     <% @doctors.each do |doctor| %>
+      if(current_user && current_user.role="doctor" && doctor.email==current_user)
       <tr>
         <td><%= doctor.dname %></td>
         <td><%= doctor.email %></td>
@@ -24,11 +25,14 @@
         <td><%= link_to 'Edit', edit_doctor_path(doctor) %></td>
         <% end %>
          <td><%= link_to 'Book Appointment', new_doctor_appointment_path(doctor) %></td>
+         <% if current_user && (current_user.try(:admin?)||current_user.role="doctor") %>
          <td><%= link_to 'Show Appointments', doctor_appointment_path(doctor) %></td>
+         <% end %>
         <% if current_user && current_user.try(:admin?) %>
         <td><%= link_to 'Destroy', doctor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
+      
     <% end %>
   </tbody>
 </table>

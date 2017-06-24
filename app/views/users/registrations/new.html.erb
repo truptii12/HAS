@@ -20,11 +20,16 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+  <div class="field">
+    <%= f.label :Phonenumber %><br />
+    <%= f.phone_number :Phonenumber, autocomplete: "off" %>
+  </div>
   
     
   <div class="actions">
     <%= WelcomeMail.welcome_email(:email).deliver_now %>
     <%= f.role = "patient" %>
+    <%= f.pnumber=:Phonenumber%>
     <%= f.submit "Sign up" %>
   </div>
 <% end %>

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   #devise_for :users
   get 'home/index'
+  #get 'home/aboutus'
+  get '/doctors_list' =>'appointments#doctors_list'
+  get '/aboutus' => 'home#aboutus'
 
   resources :doctors do
   resources:appointments
@@ -17,6 +20,7 @@ end
 
   # You can have the root of your site routed with "root"
    root 'home#index'
+   
   controller :patients do
   get 'patients/show'     => :show
   get 'patients/delete'   => :new

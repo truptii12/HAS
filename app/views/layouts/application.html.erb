@@ -36,10 +36,11 @@
   <div id="navbar">
     <ul>
       <li><a href="/home/index">HomePage</a></li>
-      
+      <% if current_user %>
       <li><a href="/doctors">Appointments</a></li>
+      <% end %>
       <li><a href="/doctors">Doctor</a></li>
-      
+
       
       <li><a href="/aboutus">About Us</a></li> </ul>
      
