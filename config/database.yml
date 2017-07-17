@@ -12,10 +12,10 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
-development:
-  adapter: postgresql
-  host: /tmp
-    username: user
+#development:
+  #adapter: postgresql
+  #host: /tmp
+   # username: user
    database: db/development.sqlite3
 
 
