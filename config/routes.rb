@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   #devise_for :users
   get 'home/index'
   #get 'home/aboutus'
-  get '/doctors_list' =>'appointments#doctors_list'
+  #get '/doctors_list' =>'doctors#doctors_list'
   get '/aboutus' => 'home#aboutus'
+  get '/users' => 'users#index'
 
   resources :doctors do
   resources:appointments
@@ -33,14 +34,17 @@ end
 end
 
 controller :users do
-  get 'users/show'     => :show
+  get 'users'     => :show
   get 'users/delete'   => :new
   get 'users/edit/:id' => :edit
   get 'users/delete'   => :index
+  get 'users/edit'=> :edit
+   put 'users/edit'=> :edit
   post 'users/show'     => :show
   post 'users/delete'   => :new
   post 'users/edit/:id' => :edit
   post 'users/delete'   => :index
+  get 'profile' => :show
 end
 
 controller :doctors do
@@ -52,9 +56,12 @@ controller :doctors do
   post 'doctors/delete'   => :new
   post 'doctors/edit/:id' => :edit
   post 'doctors/delete'   => :index
+  get 'doctors_list' => :doctors_list
+  
 end
 controller :appointments do
   get 'appointments/show'     => :show
+ # get 'doctor/:doctor_id/appointments/:id'=> :show
   get 'appointments/delete'   => :new
   get 'appointments/edit/:id' => :edit
   get 'appointments/delete'   => :index

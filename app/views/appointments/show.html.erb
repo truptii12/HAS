@@ -11,7 +11,7 @@
 </p>
 
 
-  <strong>Comment:</strong>
+  <strong>Description</strong>
   <%= @appointment.comment %>
 </p>
 
@@ -22,5 +22,9 @@
   <%= @appointment.doctor.dname %>
 </p>
 
+<p>
+  <strong>Patient Email:</strong>
+  <%= @appointment.patientname %>
+</p>
 <%= link_to 'Edit', edit_doctor_appointment_path(@doctor, @appointment) %> |
 <%= link_to 'Book another appointment for same doctor', new_doctor_appointment_path(@doctor) %>

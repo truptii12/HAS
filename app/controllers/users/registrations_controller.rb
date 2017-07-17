@@ -11,20 +11,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def create
      puts "hello"
      @user=super
-     
+     @user.role="patient"
+     @user.save
       WelcomeMail.welcome_email(@user).deliver_now
       puts "user created ... mail in progress"
    end
 
   # GET /resource/edit
    def edit
+    
      super
    end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+   def update
+    
+     super
+   end
 
   # DELETE /resource
   # def destroy

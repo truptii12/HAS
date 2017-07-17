@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :isAvailable, :only => :create
+ # before_filter :isAvailable, :only => :create
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   
   #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
@@ -8,20 +8,18 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
    def isAvailable
-     @appointments_list = Appointment.all
-    @appointments_list.each do |appointment|
-      if((appointment.appointmentdate = 'self.appointmentdate'))
-     
-         puts " isAvailable :: Duration clash  "
-  #       redirect_to_url
-      end
-    end
+             redirect_to doctor_appointment_path(@doctor,@appointment)
    end
   
   def index
   #  @appointments = Appointment.all
     @doctor = Doctor.find(params[:doctor_id])
     @appointments = @doctor.appointments
+    if params[:search]
+      @appointment= Appointment.search(params[:search]).order("created_at DESC")
+    else
+      @appointment= Appointment.all.order('created_at DESC')
+    end
   end
 
   # GET /appointments/1
@@ -34,15 +32,17 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   def new
     # respond_to do |format|
-  #  if(!self.isAvailable)
+ #  if(!self.isAvailable)
   @doctor = Doctor.find(params[:doctor_id])
   @appointment = @doctor.appointments.build
 #end
     #@appointment = Appointment.new
-   # else
-    #  format.html { redirect_to @appointment, notice: 'Appointment was successfully_created.' }
-     #   format.json { render :show, status: :created, location: @appointment }
-    #end
+  #  else
+      #format.html { redirect_to @appointment, notice: 'Appointment was successfully_created.' }
+       # format.json { render :show, status: :created, location: @appointment }
+       #  format.html { render :new }
+        #  format.json { render json: @appointment.errors, status: :unprocessable_entity }
+   # end
   end
 
   # GET /appointments/1/edit
@@ -68,6 +68,8 @@ class AppointmentsController < ApplicationController
    @appointment = @doctor.appointments.build(params.require(:appointment).permit(:appointmentdate, :startTime, :comment, :patient_id, :doctor_id))
      #respond_to do |format|
       #  @appointments_list = Appointment.all
+      
+      @appointment.patientname=current_user.email
         
         
       if @appointment.save
@@ -76,8 +78,8 @@ class AppointmentsController < ApplicationController
         redirect_to doctor_appointment_path(@doctor, @appointment)
       else
    
-          format.html { render :new }
-          format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        # format.html { render :isAvailable }
+        render 'new'
       end
         
                                           
@@ -102,12 +104,12 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1
   # DELETE /appointments/1.json
   def destroy
-   @doctor = Doctor.find(params[:doctor_id])
+  #@doctor = Doctor.find(params[:doctor_id])
    @appointment = Appointment.find(params[:id])
    @appointment.destroy
    respond_to do |format|
-   format.html { redirect_to doctor_appointment_path(@doctor) }
-   format.xml { head :ok }
+    format.html { redirect_to doctors_url, notice: 'Appointment was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
  
@@ -122,7 +124,5 @@ class AppointmentsController < ApplicationController
     def appointment_params
       params.require(:appointment).permit(:appointmentdate, :startTime, :comment, :patient_id, :doctor_id)
     end
-    
-   
 end
 

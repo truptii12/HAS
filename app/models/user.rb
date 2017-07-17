@@ -11,5 +11,7 @@ class User < ActiveRecord::Base
       puts "Hello"
        WelcomeMail.welcome_email(self).deliver_now
     end
+    
+    
 
 end

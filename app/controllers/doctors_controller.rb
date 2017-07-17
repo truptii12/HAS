@@ -12,6 +12,11 @@ class DoctorsController < ApplicationController
     @doctors = Doctor.all
   end
 
+  def doctors_list
+  
+    
+    @doctors = Doctor.all
+  end
   # GET /doctors/1
   # GET /doctors/1.json
   def show
@@ -35,18 +40,26 @@ class DoctorsController < ApplicationController
   # POST /doctors
   # POST /doctors.json
   def create
-    @doctor = Doctor.new(doctor_params)
-     
-        
+   # @doctor = Doctor.new(doctor_params)
+   @doctor = Doctor.new()
+        @doctor.dname = params[:doctor][:dname]
+@doctor.email = params[:doctor][:email]
+@doctor.default_appoinment_duration = params[:doctor][:default_appoinment_duration]
+@doctor.speciality = params[:doctor][:speciality]
+@doctor.contact = params[:doctor][:contact]
 
     respond_to do |format|
       if @doctor.save
         generated_password = Devise.friendly_token.first(8)
         @password=generated_password
+       # logger = Logger.new("password"+@password)
+        puts "password"+@password
+        
         User.create!({:email => @doctor.email, :role => "doctor", :password => @password, :password_confirmation => @password })
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
+         
         format.json { render :show, status: :created, location: @doctor }
-        RegistrationMailer.welcome(user, generated_password).deliver
+        WelcomeMail.welcome(user, generated_password).deliver
       else
         format.html { render :new }
         format.json { render json: @doctor.errors, status: :unprocessable_entity }
@@ -86,6 +99,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:dname, :email, :default_appoinment_duration)
+      params.require(:doctor).permit(:dname, :email, :default_appoinment_duration,:speciality)
     end
 end

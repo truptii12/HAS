@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624133141) do
+ActiveRecord::Schema.define(version: 20170712175511) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "kulkarni.trupti.v.19@gmail.com", null: false
@@ -39,10 +39,28 @@ ActiveRecord::Schema.define(version: 20170624133141) do
     t.integer  "doctor_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "pnumber"
+    t.string   "patientname"
   end
 
   add_index "appointments", ["doctor_id"], name: "index_appointments_on_doctor_id"
   add_index "appointments", ["patient_id"], name: "index_appointments_on_patient_id"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "doctors", force: :cascade do |t|
     t.string   "dname"
@@ -52,6 +70,8 @@ ActiveRecord::Schema.define(version: 20170624133141) do
     t.datetime "updated_at",                  null: false
     t.integer  "contact"
     t.integer  "NPI"
+    t.boolean  "active"
+    t.string   "speciality"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -80,6 +100,9 @@ ActiveRecord::Schema.define(version: 20170624133141) do
     t.boolean  "admin"
     t.string   "role"
     t.string   "pnumber"
+    t.datetime "dob"
+    t.string   "address"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -3,8 +3,8 @@
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= WelcomeMail.welcome_email(resource_name.email).deliver_now %>
-  <%= resource_name.role = "patient"%>
+  <!--%= WelcomeMail.welcome_email(resource_name.email).deliver_now %-->
+  <!--%= resource_name.role = "patient"%-->
   <%= link_to "Sign up", new_registration_path(resource_name) %><br />
 <% end -%>
 
