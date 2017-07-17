@@ -12,11 +12,11 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
-#development:
- # adapter: postgresql
-#  host: /tmp
-#  username: user
-#  database: app-dev
+development:
+  adapter: postgresql
+  host: /tmp
+    username: user
+   database: db/development.sqlite3
 
 
 # Warning: The database defined as "test" will be erased and
