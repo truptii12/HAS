@@ -8,15 +8,15 @@ default: &default
   adapter: sqlite3
   pool: 5
   timeout: 5000
-  host: /tmp
+ # host: /tmp
 development:
- # <<: *default
-#  database: db/development.sqlite3
-development:
-  adapter: postgresql
-  host: /tmp
-  username: user
-  database: app-dev
+  <<: *default
+  database: db/development.sqlite3
+#development:
+ # adapter: postgresql
+#  host: /tmp
+#  username: user
+#  database: app-dev
 
 
 # Warning: The database defined as "test" will be erased and
