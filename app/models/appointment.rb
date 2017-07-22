@@ -4,7 +4,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :doctor
   validates :appointmentdate, uniqueness: {scope: [:startTime,:doctor_id] , 
      message: ->(object, data) do
-        "Hey select another appointment date "
+        "The slot is already taken"
       end
       
   }
@@ -68,7 +68,7 @@ class Appointment < ActiveRecord::Base
   end
  
  def self.search(search)
-     where("comments LIKE ?", "%#{search}%")
+     where("self.comment LIKE ?", "%#{search}%")
   end
 # handle_asynchronously :reminder, :run_at => Proc.new { |i| i.when_to_run }
 

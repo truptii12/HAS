@@ -14,19 +14,31 @@ class AppointmentsController < ApplicationController
   def index
   #  @appointments = Appointment.all
     @doctor = Doctor.find(params[:doctor_id])
-    @appointments = @doctor.appointments
+  #  @appointments = @doctor.appointments
     if params[:search]
-      @appointment= Appointment.search(params[:search]).order("created_at DESC")
+        puts "in search"
+        puts params[:search].inspect
+        @criteria = params[:search]
+        @appointments = @doctor.appointments.where(comment: @criteria)
     else
+        @appointments = @doctor.appointments
       @appointment= Appointment.all.order('created_at DESC')
+       puts "in search else"
     end
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-   @doctor = Doctor.find(params[:doctor_id])
-   @appointment = @doctor.appointments.find(params[:id])
+  # @doctor = Doctor.find(params[:doctor_id])
+   #@appointment = @doctor.appointments.find(params[:id])
+     @doctor = Doctor.find(params[:doctor_id])
+    @appointments = @doctor.appointments
+   if params[:search]
+      @appointment= Appointment.search(params[:search]).order("created_at DESC")
+    else
+      @appointment= Appointment.all.order('created_at DESC')
+    end
   end
 
   # GET /appointments/new

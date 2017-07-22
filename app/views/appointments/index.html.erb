@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
-<%= form_tag(doctor_appointment_path(@doctor,@appointment), :method => "get") do %>
-<%= text_field_tag :search, nil, :placeholder => "Search Appointment by Name" %>
+<%= form_tag(doctor_appointments_path(@doctor), :method => "get") do %>
+<%= text_field_tag :search, nil, :placeholder => "Search Appointment by description" %>
 <%= submit_tag "Search" %>
 <% end %>
 <h1>Listing Appointments</h1>
+
 
 <table>
   <thead>

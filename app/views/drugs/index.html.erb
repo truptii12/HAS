@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag(drugs_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search by firstname" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+<h1>Listing Drugs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Firm</th>
+      <th>Cost</th>
+      <th>Description</th>
+      <th>Age</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drugs.each do |drug| %>
+      <tr>
+        <td><%= drug.firstname %></td>
+        <td><%= drug.lastname %></td>
+        <td><%= drug.firm %></td>
+        <td><%= drug.cost %></td>
+        <td><%= drug.description %></td>
+        <td><%= drug.age %></td>
+        <td><%= link_to 'Show', drug %></td>
+        <td><%= link_to 'Edit', edit_drug_path(drug) %></td>
+        <td><%= link_to 'Destroy', drug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Drug', new_drug_path %>

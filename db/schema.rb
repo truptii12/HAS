@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712175511) do
+ActiveRecord::Schema.define(version: 20170720022843) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "kulkarni.trupti.v.19@gmail.com", null: false
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(version: 20170712175511) do
     t.integer  "NPI"
     t.boolean  "active"
     t.string   "speciality"
+  end
+
+  create_table "drugs", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "firm"
+    t.decimal  "cost"
+    t.string   "description"
+    t.string   "age"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "meds", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.decimal  "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "patients", force: :cascade do |t|

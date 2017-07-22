@@ -51,15 +51,15 @@ class DoctorsController < ApplicationController
     respond_to do |format|
       if @doctor.save
         generated_password = Devise.friendly_token.first(8)
-        @password=generated_password
+        @password=@doctor.contact
        # logger = Logger.new("password"+@password)
-        puts "password"+@password
+       # puts "password"+@password
         
         User.create!({:email => @doctor.email, :role => "doctor", :password => @password, :password_confirmation => @password })
         format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
          
         format.json { render :show, status: :created, location: @doctor }
-        WelcomeMail.welcome(user, generated_password).deliver
+        WelcomeMail.welcome_doctor(@user, @password).deliver
       else
         format.html { render :new }
         format.json { render json: @doctor.errors, status: :unprocessable_entity }

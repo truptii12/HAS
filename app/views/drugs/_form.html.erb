@@ -1,0 +1,53 @@
+<%= form_for(@drug) do |f| %>
+  <% if @drug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@drug.errors.count, "error") %> prohibited this drug from being saved:</h2>
+
+      <ul>
+      <% @drug.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :firstname %><br>
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :firm %><br>
+    <%= f.text_field :firm %>
+  </div>
+  <div class="field">
+    <%= f.label :cost %><br>
+    <%= f.text_field :cost %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br>
+    <%= f.text_field :age %>
+  </div>
+  
+  
+  <div class="field">
+Biotene:
+<%= check_box_tag 'drug[windows]', 'windows' %>
+</div>
+  
+  <div class="field">
+Panadol:
+<%= check_box_tag 'drug[panadols]', 'panadols' %>
+</div>  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

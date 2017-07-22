@@ -1,0 +1,36 @@
+<%= form_for(@med) do |f| %>
+  <% if @med.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@med.errors.count, "error") %> prohibited this med from being saved:</h2>
+
+      <ul>
+      <% @med.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :firstname %><br>
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :cost %><br>
+    <%= f.text_field :cost %>
+  </div>
+  
+  
+  <div class="field">
+Electric windows:
+<%= check_box_tag 'med[windows]', 'windows' %>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
